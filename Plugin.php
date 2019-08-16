@@ -12,19 +12,24 @@ class Plugin extends Base
         define('SETTING_PROJECT_SCHEMA', 'TaskNumberPluginTicketNumberSchema');
         define('SETTING_TICKET_NUMBERS_ENABLED', 'TaskNumberPluginTicketNumberEnabled');
         define('SETTING_CURRENT_NUMBER', 'TaskNumberPluginTicketNumberCurrentNumber');
-        $this->hook->on('model:task:creation:prepare', function ($arr) {
+        define('TASK_TICKET_NUMBER', 'TaskNumberPluginTicketNumberTaskTicketNumber');
+        $this->hook->on('model:task:creation:aftersave', function ($taskId) {
+            $arr = $this->taskFinderModel->getById($taskId);
             $projectId = $arr['project_id'];
             if($this->taskNumberModel->isTicketNumberFeatureEnabledByProject($projectId)) {
                 $ticketSchema = $this->taskNumberModel->getTicketNumberSchemaByProject($projectId);
                 $nr = $this->taskNumberModel->resolveAndUpdateTicketNumber($projectId);
                 $ticketNumber = $ticketSchema . '-' . $nr;
-                $arr['title'] = $ticketNumber . ': ' . $arr['title'];
+                $values = array(
+                    'id' => $taskId,
+                    'title' => $ticketNumber . ': ' . $arr['title']
+                );
                 if(empty($arr['reference'])) {
-                    $arr['reference'] = $ticketNumber;
+                    $values['reference'] = $ticketNumber;
                 }
-                print_r($arr);
+                $this->taskModificationModel->update($values, false);
+                $this->taskNumberModel->updateCurrentTicketNumberForTask($taskId, $ticketNumber . ': ' . $arr['title']);
             }
-            //return $arr;
         });
         $this->template->hook->attach('template:project:sidebar', 'tasknumberplugin:project/sidebar');
     }

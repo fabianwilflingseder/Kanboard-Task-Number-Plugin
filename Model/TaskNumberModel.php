@@ -105,4 +105,18 @@ class TaskNumberModel extends Base
         $this->projectMetadataModel->save($project_id, [SETTING_CURRENT_NUMBER => $number]);
         return $number;
     }
+
+    /**
+     * Update the current number for a task
+     *
+     * @access public
+     * @param integer   $taskId       Task ID
+     * @param integer   $number       Number
+     * @return number
+     */
+    public function updateCurrentTicketNumberForTask($taskId, $number)
+    {
+        $this->taskMetadataModel->save($taskId, [TASK_TICKET_NUMBER => $number]);
+        return $number;
+    }
 }
