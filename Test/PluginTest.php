@@ -2,7 +2,7 @@
 
 require_once 'tests/units/Base.php';
 
-use Kanboard\Plugin\TaskNumberPlugin\Plugin;
+use Kanboard\Plugin\Tasknumberplugin\Plugin;
 
 class PluginTest extends Base
 {

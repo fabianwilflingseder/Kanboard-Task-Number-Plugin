@@ -1,4 +1,4 @@
-plugin=TaskNumberPlugin
+plugin=Tasknumberplugin
 
 all:
 	@ echo "Build archive for plugin ${plugin} version=${version}"

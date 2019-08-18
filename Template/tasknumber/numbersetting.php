@@ -1,7 +1,7 @@
 <div class="page-header">
     <h2>Task Numbers</h2>
 </div>
-<form method="post" action="<?= $this->url->href('TaskNumberController', 'save', array('plugin' => 'TaskNumberPlugin')) ?>">
+<form method="post" action="<?= $this->url->href('TaskNumberController', 'save', array('plugin' => 'Tasknumberplugin')) ?>">
 
     <?= $this->form->csrf() ?>
 

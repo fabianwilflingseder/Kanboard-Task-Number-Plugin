@@ -1,6 +1,6 @@
 <?php
 
-namespace Kanboard\Plugin\TaskNumberPlugin;
+namespace Kanboard\Plugin\Tasknumberplugin;
 
 use Kanboard\Core\Plugin\Base;
 use Kanboard\Core\Translator;
@@ -9,10 +9,10 @@ class Plugin extends Base
 {
     public function initialize()
     {
-        define('SETTING_PROJECT_SCHEMA', 'TaskNumberPluginTicketNumberSchema');
-        define('SETTING_TICKET_NUMBERS_ENABLED', 'TaskNumberPluginTicketNumberEnabled');
-        define('SETTING_CURRENT_NUMBER', 'TaskNumberPluginTicketNumberCurrentNumber');
-        define('TASK_TICKET_NUMBER', 'TaskNumberPluginTicketNumberTaskTicketNumber');
+        define('SETTING_PROJECT_SCHEMA', 'TasknumberpluginTicketNumberSchema');
+        define('SETTING_TICKET_NUMBERS_ENABLED', 'TasknumberpluginTicketNumberEnabled');
+        define('SETTING_CURRENT_NUMBER', 'TasknumberpluginTicketNumberCurrentNumber');
+        define('TASK_TICKET_NUMBER', 'TasknumberpluginTicketNumberTaskTicketNumber');
         $this->hook->on('model:task:creation:aftersave', function ($taskId) {
             $arr = $this->taskFinderModel->getById($taskId);
             $projectId = $arr['project_id'];
@@ -52,7 +52,7 @@ class Plugin extends Base
     public function getClasses()
     {
         return array(
-            'Plugin\TaskNumberPlugin\Model' => array(
+            'Plugin\Tasknumberplugin\Model' => array(
                 'TaskNumberModel'
             )
         );
@@ -79,7 +79,7 @@ class Plugin extends Base
         // >=1.0.37
         // <1.0.37
         // <=1.0.37
-        return '>=1.0.37';
+        return '>=1.0.37'; // version at development time
     }
 }
 

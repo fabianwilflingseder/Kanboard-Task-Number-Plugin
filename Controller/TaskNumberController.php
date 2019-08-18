@@ -1,5 +1,5 @@
 <?php
-namespace Kanboard\Plugin\TaskNumberPlugin\Controller;
+namespace Kanboard\Plugin\Tasknumberplugin\Controller;
 use Kanboard\Controller\BaseController;
 /**
  * Task Number Controller
@@ -43,43 +43,6 @@ class TaskNumberController extends BaseController
             $this->taskNumberModel->updateCurrentTicketNumberForProject($project_id, $values['number']);
         } else $this->flash->failure(t('Unable to save the ticket number'));
         
-        $this->response->redirect($this->helper->url->to('TaskNumberController', 'show', array('plugin' => 'TaskNumberPlugin', 'project_id' => $project_id)));
+        $this->response->redirect($this->helper->url->to('TaskNumberController', 'show', array('plugin' => 'Tasknumberplugin', 'project_id' => $project_id)));
     }
-
-/*
-    public function create(array $values = array(), array $errors = array())
-    {
-        $user = $this->getUser();
-        $this->response->html($this->helper->layout->user('budget:hourlyrate/create', array(
-            'rates' => $this->hourlyRate->getAllByUser($user['id']),
-            'currencies_list' => $this->currencyModel->getCurrencies(),
-            'values' => $values + array('user_id' => $user['id']),
-            'errors' => $errors,
-            'user' => $user,
-        )));
-    }
-
-    
-
-    public function confirm()
-    {
-        $user = $this->getUser();
-        $this->response->html($this->template->render('budget:hourlyrate/remove', array(
-            'rate_id' => $this->request->getIntegerParam('rate_id'),
-            'user' => $user,
-        )));
-    }
-
-    public function remove()
-    {
-        $this->checkCSRFParam();
-        $user = $this->getUser();
-        if ($this->hourlyRate->remove($this->request->getIntegerParam('rate_id'))) {
-            $this->flash->success(t('Rate removed successfully.'));
-        } else {
-            $this->flash->success(t('Unable to remove this rate.'));
-        }
-        $this->response->redirect($this->helper->url->to('HourlyRateController', 'show', array('plugin' => 'budget', 'user_id' => $user['id'])), true);
-    }
-    */
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Kanboard\Plugin\TaskNumberPlugin\Model;
+namespace Kanboard\Plugin\Tasknumberplugin\Model;
 
 use Kanboard\Core\Base;
 use SimpleValidator\Validator;
